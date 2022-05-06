@@ -14,7 +14,7 @@ What tech stack you plan on using (example: using Tailwind for styling)
 
 
 Wireframes of your game
-# ![Wireframe] (file:///Users/emilykiss/Desktop/IMG_0985.JPG)
+# ![Wireframe](file:///Users/emilykiss/Desktop/IMG_0985.JPG)
 Drew this while thinking about food, but leaning toward the player catching clothing items.
 
 MVP Goals
