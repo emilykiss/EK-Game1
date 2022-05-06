@@ -1,13 +1,11 @@
-console.log("is this workin 👀");
+console.log("is this workin 👀")
+const canvas = document.querySelector("#canvas")
+const movementDisplay = document.querySelector("#score")
+//Setting the dimensions of the canvas
+const ctx = canvas.getContext("2d");
+canvas.setAttribute("height", getComputedStyle(canvas)["height"])
+canvas.setAttribute("width", getComputedStyle(canvas)["width"])
 
-// var count = 4;
-// function anim() {
-//   if (count > 0) {
-//     console.log(count);
-//     count--;
-//     setTimeout(anim, 700);
-//   } else {
-//     alert("GO!!");
-//   }
-// }
-// anim();
+
+  
+     

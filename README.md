@@ -36,3 +36,7 @@ Any potential roadblock
 * Goals that are out of my league 
 * Self doubt
 * I have struggled with fully understanding DOM elements but my goal this weekend is heavilly reviewing 
+
+Sources 
+- https://www.geeksforgeeks.org/html5-game-development-infinitely-scrolling-background/
+- https://www.youtube.com/watch?v=7JtLHJbm0kA
