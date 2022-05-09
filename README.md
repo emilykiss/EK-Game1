@@ -40,3 +40,5 @@ Any potential roadblock
 Sources 
 - https://www.geeksforgeeks.org/html5-game-development-infinitely-scrolling-background/
 - https://www.youtube.com/watch?v=7JtLHJbm0kA
+- https://www.youtube.com/watch?v=UdSVPgNkOyU
+- 
