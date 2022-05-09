@@ -1,6 +1,7 @@
 console.log("is this workin 👀")
 const canvas = document.querySelector("#canvas")
 const movementDisplay = document.querySelector("#score")
+
 //Setting the dimensions of the canvas
 const ctx = canvas.getContext("2d")
 
@@ -18,7 +19,6 @@ class Object {
     this.color = color;
     this.width = width;
     this.height = height;
-    this.alive = true;
   }
 
   render() {
@@ -60,11 +60,25 @@ canvas.addEventListener("click", (e) => {
 
 document.addEventListener('keydown', movementHandler)
 
-function spawnSnack(){
+// function dropObject(){
+//     const donut = new Object(10, 5, "lightgreen", 32, 48);
+//     const donutBottom = 400
+//     const donutTop = Math.floor(Math.random()*600)
+//     objects.appendChild(donut)
+// }
 
-}
 
+// function drop(){
+//     const gravity = 10
+//     donut.y += gravity
+//     return
+// }
+// drop()
 
+const gravity = 1
+const drop = setInterval(function(){
+    donut.y += gravity;
+})
 
 
 

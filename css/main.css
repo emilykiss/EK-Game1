@@ -34,7 +34,11 @@ canvas {
   background-color: lightpink;
   width: 100%;
   height: 100%;
-  background-image: url(file:///Users/emilykiss/Desktop/2.webp);
+  background-image: url(file:///Users/emilykiss/Desktop/pixel-grocery.gif);
+  background-repeat:no-repeat;
+  background-size: cover;
+  /* file:///Users/emilykiss/Desktop/2.webp */
+
 }
 
 #top-left, #top-right, #bottom-left, #bottom-right, #bottom-middle {
