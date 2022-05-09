@@ -29,6 +29,7 @@ class Object {
 
 const shopper = new Object(5, 330, "hotpink", 80, 80);
 const donut = new Object(10, 5, "lightgreen", 32, 48);
+const veggie = new Object(20, 5, "green", 32, 48);
 
 function drawBox(x, y, w, h, color) {
   ctx.fillStyle = color
@@ -52,6 +53,8 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     shopper.render()
     donut.render()
+    veggie.render()
+    detectHit()
 }
 
 canvas.addEventListener("click", (e) => {
@@ -60,29 +63,24 @@ canvas.addEventListener("click", (e) => {
 
 document.addEventListener('keydown', movementHandler)
 
-// function dropObject(){
-//     const donut = new Object(10, 5, "lightgreen", 32, 48);
-//     const donutBottom = 400
-//     const donutTop = Math.floor(Math.random()*600)
-//     objects.appendChild(donut)
-// }
-
-
-// function drop(){
-//     const gravity = 10
-//     donut.y += gravity
-//     return
-// }
-// drop()
-
 const gravity = 1
 const drop = setInterval(function(){
     donut.y += gravity;
 })
+ 
+setInterval(drop, 100)
 
-
-
-
+function detectHit() {
+  if (
+    shopper.x < donut.x + donut.width &&
+    shopper.x + donut.width > donut.x &&
+    shopper.y < donut.y + donut.height &&
+    shopper.y + shopper.height > donut.y
+  ) {
+    const collide = document.querySelector("#status1");
+    collide.innerText = "Keep it up!"
+  }
+}
 
 
 
