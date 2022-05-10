@@ -14,6 +14,7 @@ body {
 
 h2 {
     color: hotpink;
+    font-family: 'Press Start 2P', sans-serif;
 }
 
 #container {
@@ -77,3 +78,12 @@ main {
     background-color: lightpink;
 }
 
+#restart {
+    background-color: hotpink;
+    border: 1px solid lightpink;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+    color: lightpink;
+    font-family: 'Press Start 2P', sans-serif;
+}

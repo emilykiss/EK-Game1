@@ -9,7 +9,12 @@ const ctx = canvas.getContext("2d")
 canvas.setAttribute("height", getComputedStyle(canvas)["height"])
 canvas.setAttribute("width", getComputedStyle(canvas)["width"])
 
-const gameLoopInterval = setInterval(gameLoop, 60);
+
+let score = 100
+
+setInterval(gameLoop, 60);
+
+let gameOver = false
 
 //setting an object that contains the player's info 
 class Object {
@@ -19,6 +24,7 @@ class Object {
     this.color = color;
     this.width = width;
     this.height = height;
+    this.active = true;
   }
 
   render() {
@@ -27,9 +33,12 @@ class Object {
   }
 }
 
-const shopper = new Object(5, 330, "hotpink", 80, 80);
-const donut = new Object(10, 5, "lightgreen", 32, 48);
-const veggie = new Object(20, 5, "green", 32, 48);
+const randomNum = Math.floor((Math.random()*700)+50)
+const randomNum2 = Math.floor((Math.random()* 700) + 50)
+
+const shopper = new Object(5, 360, "hotpink", 80, 80);
+const donut = new Object(randomNum, 0, "lightpink", 32, 48);
+const veggie = new Object(randomNum2, 0, "lightgreen", 32, 48);
 
 function drawBox(x, y, w, h, color) {
   ctx.fillStyle = color
@@ -37,7 +46,7 @@ function drawBox(x, y, w, h, color) {
 }
 
 function movementHandler(e) {
-const speed = 50
+const speed = 60
 console.log(e.key)
   switch (e.key) {
     case('ArrowLeft'):
@@ -52,9 +61,16 @@ console.log(e.key)
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     shopper.render()
-    donut.render()
-    veggie.render()
+    if (donut.active) {
+      donut.render()
+    }
+    if (veggie.active) {
+      veggie.render();
+    }
     detectHit()
+    detectLoss()
+    console.log(donut)
+    console.log(veggie)
 }
 
 canvas.addEventListener("click", (e) => {
@@ -63,12 +79,13 @@ canvas.addEventListener("click", (e) => {
 
 document.addEventListener('keydown', movementHandler)
 
-const gravity = 1
+const gravity = .5
 const drop = setInterval(function(){
     donut.y += gravity;
+    veggie.y += gravity;
 })
- 
-setInterval(drop, 100)
+
+
 
 function detectHit() {
   if (
@@ -77,46 +94,48 @@ function detectHit() {
     shopper.y < donut.y + donut.height &&
     shopper.y + shopper.height > donut.y
   ) {
+    if (donut.active === true){
+      donut.active = false
+      const collide = document.querySelector("#status1");
+      collide.innerText = "Keep it up!"
+      const updatedScore = document.querySelector("#score");
+      updatedScore.innerText = score +50
+      score = score + 50
+    
+    }
+  }
+}
+function detectLoss() {
+  const updatedScore = document.querySelector("#score");
+
+  if (
+    shopper.x < veggie.x + veggie.width &&
+    shopper.x + veggie.width > veggie.x &&
+    shopper.y < veggie.y + veggie.height &&
+    shopper.y + shopper.height > veggie.y
+  ) {
+    veggie.active = false
     const collide = document.querySelector("#status1");
-    collide.innerText = "Keep it up!"
+    collide.innerText = "Hey! Emily wanted a donut!";
+   
+    updatedScore.innerText = score -50
+    score = score - 50
+  } 
+
+  if (score <= 0) {
+      clearInterval()
+     updatedScore.innerText = 0
   }
 }
 
 
 
+//math floor -> mathrandom 
+//size of screen is 880 dont start at zero
 
 
+document.querySelector("#restart").addEventListener("click", function () {
+  console.log("hey");
+  location.reload();
+})
 
-
-
-
-
-
-
-
-
-
-// class Food {
-//   constructor(x, y, color, width, height) {
-//     this.x = x;
-//     this.y = y;
-//     this.color = color;
-//     this.width = width;
-//     this.height = height;
-//     this.alive = true;
-//   }
-//   render() {
-//     ctx.fillStyle = this.color;
-//     ctx.fillRect(this.x, this.y, this.width, this.height);
-//   }
-// }
-
-// const donut = new Food(300, 300, "yellow", 40, 40);
-// const veggie = new Food(300, 300, "green", 40, 40);
-// donut.render()
-// veggie.render()
-
-// function drawBox(x, y, w, h, color) {
-//   ctx.fillStyle = color
-//   ctx.fillRect(x, y, w, h);
-// }
