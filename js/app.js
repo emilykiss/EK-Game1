@@ -12,7 +12,7 @@ canvas.setAttribute("width", getComputedStyle(canvas)["width"])
 
 let score = 100
 
-// setInterval(gameLoop, 6000);
+setInterval(gameLoop, 60);
 
 let gameOver = false
 
@@ -32,28 +32,13 @@ class Object {
     ctx.fillRect(this.x, this.y, this.width, this.height)
   }
 }
-const shopper = new Object(5, 360, "hotpink", 80, 80);
-let donut = new Object(20, 0, "lightpink", 32, 48)
-let veggie = new Object(60, 0, "lightgreen", 32, 48)
 
-let donuts = []
-let veggies = []
-
-donuts.push(donut)
-veggies.push(veggie)
-
-function gameInterval(){
 const randomNum = Math.floor((Math.random()*700)+50)
 const randomNum2 = Math.floor((Math.random()* 700) + 50)
-let donutObj = new Object(randomNum, 0, "lightpink", 32, 48)
-let veggieObj = new Object(randomNum2, 0, "lightgreen", 32, 48)
-donuts.push(donutObj)
-veggies.push(veggieObj)
-donutObj.render()
-veggieObj.render()
-}
 
-
+const shopper = new Object(5, 360, "hotpink", 80, 80);
+const donut = new Object(randomNum, 0, "lightpink", 32, 48);
+const veggie = new Object(randomNum2, 0, "lightgreen", 32, 48);
 
 function drawBox(x, y, w, h, color) {
   ctx.fillStyle = color
@@ -72,32 +57,33 @@ console.log(e.key)
       break
   }
 }
-const interval = setInterval(gameInterval,5000)
-
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     shopper.render()
+    if (donut.active) {
+      donut.render()
+    }
+    if (veggie.active) {
+      veggie.render();
+    }
     detectHit()
     detectLoss()
+    console.log(donut)
+    console.log(veggie)
 }
 
 canvas.addEventListener("click", (e) => {
-  console.log(`x is ${e.offsetX} y is ${e.offsetY}`)
-})
+  console.log(`x is ${e.offsetX} y is ${e.offsetY}`);
+});
 
 document.addEventListener('keydown', movementHandler)
 
-const gravity = 10
+const gravity = .5
 const drop = setInterval(function(){
-    for (let i=0 ; i < donuts.length ; i++){
-      console.log(donuts[i].y)
-      donuts[i].y += gravity
-      donuts[i].render()
-    }
-  // donut.y += gravity;
-  //   veggie.y += gravity;
-}, 5000)
+    donut.y += gravity;
+    veggie.y += gravity;
+})
 
 
 
@@ -132,7 +118,7 @@ function detectLoss() {
     const collide = document.querySelector("#status1");
     collide.innerText = "Hey! Emily wanted a donut!";
    
-    score = score - 5
+    score = score - 50
     updatedScore.innerText = score 
   } 
 
@@ -142,13 +128,7 @@ function detectLoss() {
   }
 }
 
-
-
-
-
-
-
-
+// const repeat = setInterval(gameLoop(), 1000)
 
 // function spawnRandomObject() {
 // if (randomNum < 500) {
