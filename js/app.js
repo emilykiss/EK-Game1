@@ -36,17 +36,24 @@ const shopper = new Object(5, 360, "hotpink", 80, 80);
 let donut = new Object(20, 0, "lightpink", 32, 48)
 let veggie = new Object(60, 0, "lightgreen", 32, 48)
 
+let donuts = []
+let veggies = []
+
+donuts.push(donut)
+veggies.push(veggie)
+
 function gameInterval(){
 const randomNum = Math.floor((Math.random()*700)+50)
 const randomNum2 = Math.floor((Math.random()* 700) + 50)
-donut = new Object(randomNum, 0, "lightpink", 32, 48)
-veggie = new Object(randomNum2, 0, "lightgreen", 32, 48)
-console.log(donut, veggie, "hello")
-donut.render()
-veggie.render()
-
-
+let donutObj = new Object(randomNum, 0, "lightpink", 32, 48)
+let veggieObj = new Object(randomNum2, 0, "lightgreen", 32, 48)
+donuts.push(donutObj)
+veggies.push(veggieObj)
+donutObj.render()
+veggieObj.render()
 }
+
+
 
 function drawBox(x, y, w, h, color) {
   ctx.fillStyle = color
@@ -71,26 +78,25 @@ const interval = setInterval(gameInterval,5000)
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     shopper.render()
-    if (donut.active) {
-      donut.render()
-    }
-    if (veggie.active) {
-      veggie.render();
-    }
     detectHit()
     detectLoss()
 }
 
 canvas.addEventListener("click", (e) => {
-  console.log(`x is ${e.offsetX} y is ${e.offsetY}`);
-});
+  console.log(`x is ${e.offsetX} y is ${e.offsetY}`)
+})
 
 document.addEventListener('keydown', movementHandler)
 
-const gravity = .5
+const gravity = 10
 const drop = setInterval(function(){
-    donut.y += gravity;
-    veggie.y += gravity;
+    for (let i=0 ; i < donuts.length ; i++){
+      console.log(donuts[i].y)
+      donuts[i].y += gravity
+      donuts[i].render()
+    }
+  // donut.y += gravity;
+  //   veggie.y += gravity;
 }, 5000)
 
 
