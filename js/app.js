@@ -19,8 +19,8 @@ let score = 100;
 setInterval(gameLoop, 60)
 
 
-// const shopperSprite = new Image()
-// shopperSprite.src = "./images/"
+const shopperSprite = new Image()
+shopperSprite.src = "./images/shopper.png"
 const donutSprite = new Image()
 donutSprite.src = "./images/donut.png"
 const veggieSprite = new Image()
@@ -53,9 +53,9 @@ function generateRandom() {
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 360, 80, 80, veggieSprite)
-const donut = new Object(generateRandom(), 0, 32, 48, donutSprite)
-const veggie = new Object(generateRandom(), 0, 32, 48, veggieSprite)
+const shopper = new Object(5, 340, 100, 100, shopperSprite)
+const donut = new Object(generateRandom(), 0, 100, 100, donutSprite)
+const veggie = new Object(generateRandom(), 0, 1000, 1000, veggieSprite)
 
 // function drawBox(x, y, w, h, color) {
 //   ctx.fillStyle = color
@@ -74,11 +74,11 @@ let donuts = []
 let veggies = []
 
 const donutSpawn = setInterval(function () {
-  donuts.push(new Object(generateRandom(), 0, 32, 48, donutSprite))
+  donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite))
 }, 3000)
 
 const veggieSpawn = setInterval(function () {
-  veggies.push(new Object(generateRandom(), 0, 32, 48, veggieSprite))
+  veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite))
 }, 3500)
 
 function gameLoop() {
