@@ -29,6 +29,8 @@ class Object {
     this.active = true;
   }
 
+
+
   render() {
     ctx.fillStyle = this.color
     ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -52,7 +54,7 @@ function drawBox(x, y, w, h, color) {
 }
 
 //My gravity function- rate at which items are falling
-const speed = 8
+const speed = 10
 const drop = setInterval(function () {
   donut.y += speed
   veggie.y += speed
@@ -111,7 +113,7 @@ function gameLoop() {
 // }
 //Controls the arrow keys and speed of the player
 function movementHandler(e) {
-  const speed = 60;
+  const speed = 80;
   console.log(e.key);
   switch (e.key) {
     case "ArrowLeft":
