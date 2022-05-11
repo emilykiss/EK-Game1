@@ -1,7 +1,8 @@
-console.log("is this workin 👀");
-const canvas = document.querySelector("#canvas");
-const updatedScore = document.querySelector("#score");
-const collide = document.querySelector("#status1");
+console.log("is this workin 👀")
+const body = document.querySelector("body")
+const canvas = document.querySelector("#canvas")
+const updatedScore = document.querySelector("#score")
+const collide = document.querySelector("#status1")
 document.addEventListener("keydown", movementHandler)
 
 //Setting the dimensions of the canvas
@@ -12,9 +13,10 @@ canvas.height = 444
 canvas.width = 880
 
 //This score will change after running the gameLoop function
-let score = 100;
+let score = 100
 
-setInterval(gameLoop, 60);
+
+setInterval(gameLoop, 60)
 
 
 //setting an object that contains the player's info
@@ -41,9 +43,9 @@ function generateRandom(){
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 360, "hotpink", 80, 80);
-const donut = new Object(generateRandom(), 0, "hotpink", 32, 48);
-const veggie = new Object(generateRandom(), 0, "lightgreen", 32, 48);
+const shopper = new Object(5, 360, "hotpink", 80, 80)
+const donut = new Object(generateRandom(), 0, "aqua", 32, 48)
+const veggie = new Object(generateRandom(), 0, "lightgreen", 32, 48)
 
 function drawBox(x, y, w, h, color) {
   ctx.fillStyle = color;
@@ -51,10 +53,10 @@ function drawBox(x, y, w, h, color) {
 }
 
 //My gravity function- rate at which items are falling
-const gravity = 10;
+const speed = 8;
 const drop = setInterval(function () {
-  donut.y += gravity;
-  veggie.y += gravity;
+  donut.y += speed
+  veggie.y += speed
 })
 
 
@@ -63,12 +65,12 @@ let donuts = []
 let veggies = []
 
 const donutSpawn = setInterval(function(){
-  donuts.push( new Object(generateRandom(), 0, "hotpink", 32, 48))
+  donuts.push( new Object(generateRandom(), 0, "aqua", 32, 48))
 }, 3000)
 
 const veggieSpawn = setInterval(function () {
   veggies.push(new Object(generateRandom(), 0, "lightgreen", 32, 48));
-}, 3000);
+}, 3500);
 
 
 function gameLoop() {
@@ -76,35 +78,35 @@ function gameLoop() {
   shopper.render()
   for(let i = 0; i < donuts.length; i++){
     donuts[i].render()
-    donuts[i].y += gravity
+    donuts[i].y += speed
     if (
       shopper.x < donuts[i].x + donuts[i].width &&
       shopper.x + donuts[i].width > donuts[i].x &&
       shopper.y < donuts[i].y + donuts[i].height &&
       shopper.y + shopper.height > donuts[i].y
     ) {
-      if (donuts[i].active === true) {
-        donuts[i].active = false;
-        collide.innerText = "Keep it up!";
+        collide.innerText = "🍩 Keep it up! 🍩";
         donuts.splice(i, 1)
-        updatedScore.innerText = score + 50
-        score = score 
-      }
+        updatedScore.innerText = score 
+        score = score + 50
     }
-      for(let i = 0; i < veggies.length; i++){
-    veggies[i].render()
-    veggies[i].y += gravity
+  }
+  for (let i = 0; i < veggies.length; i++) {
+    veggies[i].render();
+    veggies[i].y += speed;
     if (
       shopper.x < veggies[i].x + veggies[i].width &&
       shopper.x + veggies[i].width > veggies[i].x &&
       shopper.y < veggies[i].y + veggies[i].height &&
       shopper.y + shopper.height > veggies[i].y
     ) {
-      // if (veggies[i].active === true) {
-      //   veggies[i].active = false;
-      //   collide.innerText = "NOOO! Em wanted that donut";
-       console.log('gameover')
-      veggies.splice(i, 1)
+      collide.innerText = "GAME OVER! I wanted that donut! 😓🍅";
+      veggies.splice(i, 1);
+      score = 0;
+      updatedScore.innerText = 0;
+      if (score === 0) {
+        clearInterval(donutSpawn);
+        clearInterval(veggieSpawn);
       }
     }
   }
@@ -130,6 +132,3 @@ document.querySelector("#restart").addEventListener("click", function () {
   location.reload();
 }) 
 
-function addPoints(){
-  score + 50
-}
