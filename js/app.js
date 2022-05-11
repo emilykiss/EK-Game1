@@ -7,14 +7,15 @@ document.addEventListener("keydown", movementHandler)
 //Setting the dimensions of the canvas
 const ctx = canvas.getContext("2d");
 
+//Had to set the dimensions to hard numbers- screen was acting wonky 
 canvas.height = 444
 canvas.width = 880
 
+//This score will change after running the gameLoop function
 let score = 100;
 
 setInterval(gameLoop, 60);
 
-let gameOver = false;
 
 //setting an object that contains the player's info
 class Object {
@@ -33,12 +34,13 @@ class Object {
   }
 }
 
-
+//This function is used to generate a random number for spawning objs
 function generateRandom(){
   let randomNumber = Math.floor(Math.random()*canvas.width - 30)
   return randomNumber
 }
 
+//My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
 const shopper = new Object(5, 360, "hotpink", 80, 80);
 const donut = new Object(generateRandom(), 0, "hotpink", 32, 48);
 const veggie = new Object(generateRandom(), 0, "lightgreen", 32, 48);
@@ -48,13 +50,15 @@ function drawBox(x, y, w, h, color) {
   ctx.fillRect(x, y, w, h)
 }
 
-
-const gravity = 5;
+//My gravity function- rate at which items are falling
+const gravity = 10;
 const drop = setInterval(function () {
   donut.y += gravity;
   veggie.y += gravity;
-});
+})
 
+
+//Arrays to push the foods into - we will need this for the gameLoop to operate 
 let donuts = []
 let veggies = []
 
@@ -106,7 +110,7 @@ function gameLoop() {
   }
 }
 // }
-
+//Controls the arrow keys and speed of the player 
 function movementHandler(e) {
   const speed = 60;
   console.log(e.key);
@@ -120,10 +124,7 @@ function movementHandler(e) {
   }
 }
 
-canvas.addEventListener("click", (e) => {
-  console.log(`x is ${e.offsetX} y is ${e.offsetY}`);
-})
-
+//Start new game- reload the page
 document.querySelector("#restart").addEventListener("click", function () {
   console.log("hey");
   location.reload();
