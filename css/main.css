@@ -9,12 +9,13 @@ body {
   background-color: hotpink;
   background-size: cover;
   background-repeat: space;
-  background-image: url(../images/backgroung.png);
+  background-image: url(../images/background.png);
 }
 
 h2 {
     color: hotpink;
-    font-family: 'Press Start 2P', sans-serif;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
 }
 
 #container {
@@ -35,10 +36,10 @@ canvas {
   background-color: lightpink;
   width: 444;
   height: 880;
-  /* background-image: url(../images/bluemarket.png); */
+  background-image: url(../images/image.png);
   background-repeat:no-repeat;
   background-size: cover;
-  /* file:///Users/emilykiss/Desktop/2.webp */
+
 
 }
 
@@ -79,11 +80,11 @@ main {
 }
 
 #restart {
-    background-color: hotpink;
+    background-color: lightpink;
     border: 1px solid lightpink;
     padding: 20px;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
-    color: lightpink;
+    color: hotpink;
     font-family: 'Press Start 2P', sans-serif;
 }

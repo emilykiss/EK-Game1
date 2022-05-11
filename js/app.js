@@ -18,7 +18,7 @@ let score = 100;
 
 setInterval(gameLoop, 60)
 
-
+//my spritessss <3 created on piskel.com
 const shopperSprite = new Image()
 shopperSprite.src = "./images/shopper.png"
 const donutSprite = new Image()
@@ -53,7 +53,7 @@ function generateRandom() {
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 340, 100, 100, shopperSprite)
+const shopper = new Object(5, 285, 160, 160, shopperSprite)
 const donut = new Object(generateRandom(), 0, 100, 100, donutSprite)
 const veggie = new Object(generateRandom(), 0, 1000, 1000, veggieSprite)
 
@@ -108,7 +108,7 @@ function gameLoop() {
       shopper.y < veggies[i].y + veggies[i].height &&
       shopper.y + shopper.height > veggies[i].y
     ) {
-      collide.innerText = "GAME OVER! I wanted that donut! 😓🍅";
+      collide.innerText = "GAME OVER... I wanted that donut! 😓🍅";
       veggies.splice(i, 1);
       score = 0;
       updatedScore.innerText = 0;
