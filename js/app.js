@@ -18,22 +18,31 @@ let score = 100;
 
 setInterval(gameLoop, 60)
 
+
+// const shopperSprite = new Image()
+// shopperSprite.src = "./images/"
+const donutSprite = new Image()
+donutSprite.src = "./images/donut.png"
+const veggieSprite = new Image()
+veggieSprite.src = "./images/tomato.png"
+
+
+
 //setting an object that contains the player's info
 class Object {
-  constructor(x, y, color, width, height) {
+  constructor(x, y, width, height, image) {
     this.x = x;
     this.y = y;
-    this.color = color;
     this.width = width;
     this.height = height;
     this.active = true;
+    this.image = image
   }
 
-
-
   render() {
-    ctx.fillStyle = this.color
-    ctx.fillRect(this.x, this.y, this.width, this.height)
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+    // ctx.fillStyle = this.color
+    // ctx.fillRect(this.x, this.y, this.width, this.height)
   }
 }
 
@@ -44,14 +53,14 @@ function generateRandom() {
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 360, "hotpink", 80, 80)
-const donut = new Object(generateRandom(), 0, "aqua", 32, 48)
-const veggie = new Object(generateRandom(), 0, "lightgreen", 32, 48)
+const shopper = new Object(5, 360, 80, 80, veggieSprite)
+const donut = new Object(generateRandom(), 0, 32, 48, donutSprite)
+const veggie = new Object(generateRandom(), 0, 32, 48, veggieSprite)
 
-function drawBox(x, y, w, h, color) {
-  ctx.fillStyle = color
-  ctx.fillRect(x, y, w, h)
-}
+// function drawBox(x, y, w, h, color) {
+//   ctx.fillStyle = color
+//   ctx.fillRect(x, y, w, h)
+// }
 
 //My gravity function- rate at which items are falling
 const speed = 10
@@ -65,11 +74,11 @@ let donuts = []
 let veggies = []
 
 const donutSpawn = setInterval(function () {
-  donuts.push(new Object(generateRandom(), 0, "aqua", 32, 48))
+  donuts.push(new Object(generateRandom(), 0, 32, 48, donutSprite))
 }, 3000)
 
 const veggieSpawn = setInterval(function () {
-  veggies.push(new Object(generateRandom(), 0, "lightgreen", 32, 48))
+  veggies.push(new Object(generateRandom(), 0, 32, 48, veggieSprite))
 }, 3500)
 
 function gameLoop() {
