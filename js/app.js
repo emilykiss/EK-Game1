@@ -18,10 +18,10 @@ let score = 100;
 setInterval(gameLoop, 60)
 
 //My audio sounds- converted them to mp3s. Activated by hit detection.
-const loseSound = new Audio('losing.mp3')
+const loseSound = new Audio('./audio/losing.mp3')
 loseSound.volume = .2
 
-const donutSound = new Audio('donut.mp3')
+const donutSound = new Audio("./audio/donut.mp3");
 donutSound.volume = .2
 
 //my spritessss <3 created on piskel.com
