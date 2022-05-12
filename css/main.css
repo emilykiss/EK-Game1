@@ -13,7 +13,7 @@ body {
 }
 
 h2 {
-    color: hotpink;
+    color: purple;
     font-family: 'Press Start 2P', cursive;
     font-size: 20px;
 }
@@ -85,6 +85,6 @@ main {
     padding: 20px;
     font-size: 18px;
     text-align: center;
-    color: hotpink;
+    color: purple;
     font-family: 'Press Start 2P', sans-serif;
 }

@@ -18,6 +18,18 @@ let score = 100;
 
 setInterval(gameLoop, 60)
 
+const loseSound = new Audio('losing.mp3')
+loseSound.volume = .2
+
+const donutSound = new Audio('donut.mp3')
+donutSound.volume = .2
+
+
+
+
+
+
+
 //my spritessss <3 created on piskel.com
 const shopperSprite = new Image()
 shopperSprite.src = "./images/shopper.png"
@@ -53,9 +65,9 @@ function generateRandom() {
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 285, 160, 160, shopperSprite)
+const shopper = new Object(5, 313, 130, 130, shopperSprite)
 const donut = new Object(generateRandom(), 0, 100, 100, donutSprite)
-const veggie = new Object(generateRandom(), 0, 1000, 1000, veggieSprite)
+const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite)
 
 // function drawBox(x, y, w, h, color) {
 //   ctx.fillStyle = color
@@ -75,11 +87,11 @@ let veggies = []
 
 const donutSpawn = setInterval(function () {
   donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite))
-}, 3000)
+}, 1500)
 
 const veggieSpawn = setInterval(function () {
   veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite))
-}, 3500)
+}, 3000)
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,11 +100,12 @@ function gameLoop() {
     donuts[i].render();
     donuts[i].y += speed;
     if (
-      shopper.x < donuts[i].x + donuts[i].width &&
+      shopper.x + 80 < donuts[i].x + donuts[i].width &&
       shopper.x + donuts[i].width > donuts[i].x &&
-      shopper.y < donuts[i].y + donuts[i].height &&
+      shopper.y + 90 < donuts[i].y + donuts[i].height &&
       shopper.y + shopper.height > donuts[i].y
     ) {
+      donutSound.play()
       collide.innerText = "🍩 Keep it up! 🍩";
       donuts.splice(i, 1);
       updatedScore.innerText = score;
@@ -103,11 +116,12 @@ function gameLoop() {
     veggies[i].render();
     veggies[i].y += speed;
     if (
-      shopper.x < veggies[i].x + veggies[i].width &&
+      shopper.x + 90 < veggies[i].x + veggies[i].width &&
       shopper.x + veggies[i].width > veggies[i].x &&
-      shopper.y < veggies[i].y + veggies[i].height &&
+      shopper.y + 90 < veggies[i].y + veggies[i].height &&
       shopper.y + shopper.height > veggies[i].y
     ) {
+      loseSound.play()
       collide.innerText = "GAME OVER... I wanted that donut! 😓🍅";
       veggies.splice(i, 1);
       score = 0;
