@@ -21,7 +21,7 @@ setInterval(gameLoop, 60)
 const loseSound = new Audio('./audio/losing.mp3')
 loseSound.volume = .2
 
-const donutSound = new Audio("./audio/donut.mp3");
+const donutSound = new Audio("./audio/donut.mp3")
 donutSound.volume = .2
 
 //my spritessss <3 created on piskel.com

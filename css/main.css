@@ -9,7 +9,7 @@ body {
   background-color: hotpink;
   background-size: cover;
   background-repeat: space;
-  background-image: url(../images/background.png);
+  background-image: url(../images/image.png);
 }
 
 h2 {
@@ -36,7 +36,7 @@ canvas {
   background-color: lightpink;
   width: 444;
   height: 880;
-  background-image: url(../images/image.png);
+  background-image: url(../images/cashier.gif);
   background-repeat:no-repeat;
   background-size: cover;
 
