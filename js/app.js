@@ -1,4 +1,3 @@
-console.log("is this workin 👀")
 const body = document.querySelector("body")
 const canvas = document.querySelector("#canvas")
 const updatedScore = document.querySelector("#score")
@@ -18,17 +17,12 @@ let score = 100;
 
 setInterval(gameLoop, 60)
 
+//My audio sounds- converted them to mp3s. Activated by hit detection.
 const loseSound = new Audio('losing.mp3')
 loseSound.volume = .2
 
 const donutSound = new Audio('donut.mp3')
 donutSound.volume = .2
-
-
-
-
-
-
 
 //my spritessss <3 created on piskel.com
 const shopperSprite = new Image()
@@ -93,6 +87,8 @@ const veggieSpawn = setInterval(function () {
   veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite))
 }, 3000)
 
+
+//Game loop 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   shopper.render();
@@ -122,13 +118,14 @@ function gameLoop() {
       shopper.y + shopper.height > veggies[i].y
     ) {
       loseSound.play()
-      collide.innerText = "GAME OVER... I wanted that donut! 😓🍅";
+      collide.innerText = "GAME OVER";
       veggies.splice(i, 1);
       score = 0;
       updatedScore.innerText = 0;
       if (score === 0) {
         clearInterval(donutSpawn);
         clearInterval(veggieSpawn);
+        
       }
     }
   }
