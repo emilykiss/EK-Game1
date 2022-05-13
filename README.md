@@ -44,4 +44,6 @@ Sources
 - https://www.geeksforgeeks.org/html5-game-development-infinitely-scrolling-background/
 - https://www.youtube.com/watch?v=7JtLHJbm0kA
 - https://www.youtube.com/watch?v=UdSVPgNkOyU
-- 
+- https://elements.envato.com/
+- https://www.youtube.com/watch?v=IlnZxLeQezI
+- https://www.piskelapp.com/p/create/sprite
