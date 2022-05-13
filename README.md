@@ -1,5 +1,9 @@
 LINK TO SUPERMARKET SWEEP: https://emilykiss.github.io/EK-Game1/ 
 
+HOW TO PLAY:
+- Use your left and right arrow keys to move your shopper around the screen!
+- Try and catch as many donuts as you can.
+- Do NOT catch a tomato, as that will end your game.
 
 OK LET'S GET INTO IT👀🥳👾
 An elevator pitch of your game idea⛺️💪🏻
@@ -39,6 +43,14 @@ Any potential roadblock
 * Goals that are out of my league 
 * Self doubt
 * I have struggled with fully understanding DOM elements but my goal this weekend is heavilly reviewing 
+
+Post-Project reflections
+- At the start  of this project, I was unsure about my js capabilities.  After spending days using trial and error, researching topics, and looking back at old assignments, I became more and more confident.
+- It was so exciting everytime I got something to work 
+- Some challenges were harder than expected (adding and creating sprites) and some were easier (adding audios).
+- I learned that sometimes, you just need to find the right resource that makes sense to you.
+- I wanted to have a high score list, so I will try to add that in post project. 
+
 
 Sources 
 - https://www.geeksforgeeks.org/html5-game-development-infinitely-scrolling-background/
