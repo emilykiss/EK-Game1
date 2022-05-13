@@ -1,38 +1,35 @@
-const body = document.querySelector("body")
-const canvas = document.querySelector("#canvas")
-const updatedScore = document.querySelector("#score")
-const collide = document.querySelector("#status1")
-document.addEventListener("keydown", movementHandler)
-
+const body = document.querySelector("body");
+const canvas = document.querySelector("#canvas");
+const updatedScore = document.querySelector("#score");
+const collide = document.querySelector("#status1");
+document.addEventListener("keydown", movementHandler);
 
 //Setting the dimensions of the canvas
-const ctx = canvas.getContext("2d")
+const ctx = canvas.getContext("2d");
 
 //Had to set the dimensions to hard numbers- screen was acting wonky
-canvas.height = 444
-canvas.width = 880
+canvas.height = 444;
+canvas.width = 880;
 
 //This score will change after running the gameLoop function
 let score = 100;
 
-setInterval(gameLoop, 60)
+setInterval(gameLoop, 60);
 
 //My audio sounds- converted them to mp3s. Activated by hit detection.
-const loseSound = new Audio('./audio/losing.mp3')
-loseSound.volume = .2
+const loseSound = new Audio("./audio/losing.mp3");
+loseSound.volume = 0.2;
 
-const donutSound = new Audio("./audio/donut.mp3")
-donutSound.volume = .2
+const donutSound = new Audio("./audio/donut.mp3");
+donutSound.volume = 0.2;
 
-//my spritessss <3 created on piskel.com
-const shopperSprite = new Image()
-shopperSprite.src = "./images/shopper.png"
-const donutSprite = new Image()
-donutSprite.src = "./images/donut.png"
-const veggieSprite = new Image()
-veggieSprite.src = "./images/tomato.png"
-
-
+// My spritessss <3 created on piskel.com
+const shopperSprite = new Image();
+shopperSprite.src = "./images/shopper.png";
+const donutSprite = new Image();
+donutSprite.src = "./images/donut.png";
+const veggieSprite = new Image();
+veggieSprite.src = "./images/tomato.png";
 
 //setting an object that contains the player's info
 class Object {
@@ -42,11 +39,11 @@ class Object {
     this.width = width;
     this.height = height;
     this.active = true;
-    this.image = image
+    this.image = image;
   }
 
   render() {
-    ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     // ctx.fillStyle = this.color
     // ctx.fillRect(this.x, this.y, this.width, this.height)
   }
@@ -54,14 +51,14 @@ class Object {
 
 //This function is used to generate a random number for spawning objs
 function generateRandom() {
-  let randomNumber = Math.floor(Math.random() * canvas.width - 30)
-  return randomNumber
+  let randomNumber = Math.floor(Math.random() * canvas.width - 30);
+  return randomNumber;
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 313, 130, 130, shopperSprite)
-const donut = new Object(generateRandom(), 0, 100, 100, donutSprite)
-const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite)
+const shopper = new Object(5, 313, 130, 130, shopperSprite);
+const donut = new Object(generateRandom(), 0, 100, 100, donutSprite);
+const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite);
 
 // function drawBox(x, y, w, h, color) {
 //   ctx.fillStyle = color
@@ -69,26 +66,25 @@ const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite)
 // }
 
 //My gravity function- rate at which items are falling
-const speed = 10
+const speed = 10;
 const drop = setInterval(function () {
-  donut.y += speed
-  veggie.y += speed
-})
+  donut.y += speed;
+  veggie.y += speed;
+});
 
-//Arrays to push the foods into - we will need this for the gameLoop to operate
-let donuts = []
-let veggies = []
+// Arrays to push the foods into - we will need this for the gameLoop to operate
+let donuts = [];
+let veggies = [];
 
 const donutSpawn = setInterval(function () {
-  donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite))
-}, 1500)
+  donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite));
+}, 1500);
 
 const veggieSpawn = setInterval(function () {
-  veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite))
-}, 3000)
+  veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite));
+}, 3000);
 
-
-//Game loop 
+// Game loop
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   shopper.render();
@@ -101,7 +97,7 @@ function gameLoop() {
       shopper.y + 90 < donuts[i].y + donuts[i].height &&
       shopper.y + shopper.height > donuts[i].y
     ) {
-      donutSound.play()
+      donutSound.play();
       collide.innerText = "🍩 Keep it up! 🍩";
       donuts.splice(i, 1);
       updatedScore.innerText = score;
@@ -117,7 +113,7 @@ function gameLoop() {
       shopper.y + 90 < veggies[i].y + veggies[i].height &&
       shopper.y + shopper.height > veggies[i].y
     ) {
-      loseSound.play()
+      loseSound.play();
       collide.innerText = "GAME OVER";
       veggies.splice(i, 1);
       score = 0;
@@ -125,7 +121,6 @@ function gameLoop() {
       if (score === 0) {
         clearInterval(donutSpawn);
         clearInterval(veggieSpawn);
-        
       }
     }
   }
@@ -147,6 +142,6 @@ function movementHandler(e) {
 
 //Start new game- reload the page
 document.querySelector("#restart").addEventListener("click", function () {
-  console.log("hey")
-  location.reload()
+  console.log("hey");
+  location.reload();
 });
