@@ -3,7 +3,8 @@ const canvas = document.querySelector("#canvas");
 const updatedScore = document.querySelector("#score");
 const collide = document.querySelector("#status1");
 document.addEventListener("keydown", movementHandler);
-
+const gameRestart = document.querySelector('#restart')
+let gameOver = false
 //Setting the dimensions of the canvas
 const ctx = canvas.getContext("2d");
 
@@ -31,7 +32,7 @@ donutSprite.src = "./images/donut.png";
 const veggieSprite = new Image();
 veggieSprite.src = "./images/tomato.png";
 
-//setting an object that contains the player's info
+//setting a class that contains the player's info
 class Object {
   constructor(x, y, width, height, image) {
     this.x = x;
@@ -56,9 +57,9 @@ function generateRandom() {
 }
 
 //My character and obstacles - X is randomly generated and Y is 0 so that the objects pop up only on the x axis
-const shopper = new Object(5, 313, 130, 130, shopperSprite);
-const donut = new Object(generateRandom(), 0, 100, 100, donutSprite);
-const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite);
+let shopper = new Object(5, 313, 130, 130, shopperSprite);
+let donut = new Object(generateRandom(), 0, 100, 100, donutSprite);
+let veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite);
 
 // function drawBox(x, y, w, h, color) {
 //   ctx.fillStyle = color
@@ -67,7 +68,7 @@ const veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite);
 
 //My gravity function- rate at which items are falling
 const speed = 10;
-const drop = setInterval(function () {
+let drop = setInterval(function () {
   donut.y += speed;
   veggie.y += speed;
 });
@@ -76,11 +77,11 @@ const drop = setInterval(function () {
 let donuts = [];
 let veggies = [];
 
-const donutSpawn = setInterval(function () {
+let donutSpawn = setInterval(function () {
   donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite));
 }, 1500);
 
-const veggieSpawn = setInterval(function () {
+let veggieSpawn = setInterval(function () {
   veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite));
 }, 3000);
 
@@ -119,8 +120,10 @@ function gameLoop() {
       score = 0;
       updatedScore.innerText = 0;
       if (score === 0) {
+        console.log('hi')
         clearInterval(donutSpawn);
         clearInterval(veggieSpawn);
+        gameOver = true
       }
     }
   }
@@ -141,7 +144,35 @@ function movementHandler(e) {
 }
 
 //Start new game- reload the page
-document.querySelector("#restart").addEventListener("click", function () {
-  console.log("hey");
-  location.reload();
-});
+// document.querySelector("#restart").addEventListener("click", function () {
+//   location.reload();
+// });
+
+
+function fresh(){
+  score = 100;
+  gameOver = false
+  drop = setInterval(function () {
+    donut.y += speed;
+    veggie.y += speed;
+  });
+
+  shopper = new Object(5, 313, 130, 130, shopperSprite);
+  donut = new Object(generateRandom(), 0, 100, 100, donutSprite);
+  veggie = new Object(generateRandom(), 0, 50, 50, veggieSprite);
+
+
+ donutSpawn = setInterval(function () {
+    donuts.push(new Object(generateRandom(), 0, 120, 140, donutSprite));
+  }, 1500);
+
+  veggieSpawn = setInterval(function () {
+    veggies.push(new Object(generateRandom(), 0, 100, 120, veggieSprite));
+  }, 3000);
+  
+  gameLoop()
+
+}
+
+gameRestart.addEventListener("click", fresh);
+
